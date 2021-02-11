@@ -1,0 +1,698 @@
+<!DOCTYPE HTML>
+<head>
+        <meta charset="UTF-8">
+    <title>Utilities Calculator</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" id="x-child-css" href="https://cdn.lawrenceks.org/wp-content/themes/pro-child/style.css?ver=2.5.5" type="text/css" media="all">
+    <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.classList"></script>
+    <style>
+
+        body {
+            font-family: "Open Sans", sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h4 {
+            font-weight: normal;
+            font-size: 17px;
+            font-style: italic;
+        }
+
+        #content {
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        #left {
+            float: left;
+            width: 70.79803%;
+            min-height: 1600px;
+        }
+
+        #right {
+            float: right;
+            width: 22.79803%;
+            position: fixed;
+            top: 0;
+            right:0;
+        }
+
+
+        #row-form {
+            background: #e7f0f7;
+            padding: 10px;
+        }
+
+        .row-form input[type=text] {
+            border-width: 2px;
+            border-style: solid;
+            border-radius: 2px;
+            border-color: #b9b9b9;
+            height: 22px;
+            padding: 0 5px 0 5px;
+            background: #fff;
+        }
+
+        .all-buttons {
+            padding: 3px 7px 3px 7px;
+            font-size: 15px;
+            font-weight: normal;
+            border-radius: 2px;
+            background: #4285f4;
+            color: white;
+        }
+
+        .all-buttons:hover {
+            background: #68a5ff;
+        }
+
+        html body div#content div#left form#row-form.row-form input.submit-button.all-buttons.all-buttons.submit-button {
+            color: white !important;
+        }
+
+        #row-form #cuts-div input[type=text] {
+            margin: 2px 0 2px 0;
+        }
+
+        #row-form #locations-div input[type=text] {
+            margin: 2px 0 2px 0;
+        }
+
+        #row-form .cut-label {
+            margin: 10px 10px 0 10px;
+        }
+
+        #row-form .location-label {
+            margin: 10px 10px 0 10px;
+        }
+
+        #row-form .remove-button {
+            margin: 0 0 0 10px;
+        }
+
+        #row-form .text-right {
+            text-align: right;
+        }
+
+        #land-use-table {
+            border-collapse: collapse;
+        }
+
+        #land-use-table td.border-right {
+            border-right: 1px solid black;
+        }
+
+        #row-form .land-use-days {
+            width: 38px;
+            margin: 0 5px 0 5px;
+        }
+
+        #row-form .land-use-feet {
+            width: 110px;
+            margin: 0 5px 0 5px;
+        }
+
+        .parking-labels {
+            display:inline-block;
+            margin: 10px 10px 0 10px;
+            width: 392px;
+        }
+
+        #cost-table {
+            color: #2c2c2c;
+            font-size:16px;
+            text-shadow: 1px 1px 0 #fff;
+            background:#eaebec;
+            margin:20px;
+            border:#ccc 1px solid;
+            border-spacing: 0;
+            /*border-collapse: collapse;*/
+            -moz-border-radius:3px;
+            -webkit-border-radius:3px;
+            border-radius:3px;
+
+            -moz-box-shadow: 0 1px 2px #d1d1d1;
+            -webkit-box-shadow: 0 1px 2px #d1d1d1;
+            box-shadow: 0 1px 2px #d1d1d1;
+        }
+
+        #cost-table th {
+            padding:21px 25px 22px 25px;
+            border-top:1px solid #fafafa;
+            border-bottom:1px solid #e0e0e0;
+
+            background: #ededed;
+            background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#ebebeb));
+            background: -moz-linear-gradient(top,  #ededed,  #ebebeb);
+        }
+        #cost-table th:first-child {
+            text-align: left;
+            padding-left:20px;
+        }
+        #cost-table tr:first-child th:first-child {
+            -moz-border-radius-topleft:3px;
+            -webkit-border-top-left-radius:3px;
+            border-top-left-radius:3px;
+        }
+        #cost-table tr:first-child th:last-child {
+            -moz-border-radius-topright:3px;
+            -webkit-border-top-right-radius:3px;
+            border-top-right-radius:3px;
+        }
+        #cost-table tr {
+            text-align: center;
+            padding-left:20px;
+        }
+        #cost-table td:first-child {
+            text-align: left;
+            padding-left:20px;
+            border-left: 0;
+        }
+        #cost-table td {
+            padding:12px;
+            border-top: 1px solid #ffffff;
+            border-bottom:1px solid #e0e0e0;
+            border-left: 1px solid #e0e0e0;
+
+            background: #fafafa;
+            background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
+            background: -moz-linear-gradient(top, #f3f3f3,  #fafafa);
+        }
+        #cost-table tr.even td {
+            background: #f6f6f6;
+            background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#e7e7e7));
+            background: -moz-linear-gradient(top, #eeeeee, #e7e7e7);
+        }
+        #cost-table tr:last-child td {
+            border-bottom:0;
+        }
+        #cost-table tr:last-child td:first-child {
+            -moz-border-radius-bottomleft:3px;
+            -webkit-border-bottom-left-radius:3px;
+            border-bottom-left-radius:3px;
+        }
+        #cost-table tr:last-child td:last-child {
+            -moz-border-radius-bottomright:3px;
+            -webkit-border-bottom-right-radius:3px;
+            border-bottom-right-radius:3px;
+        }
+        #cost-table tr:hover td {
+            background: #f2f2f2;
+            background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+            background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);
+        }
+
+        #row-form .red-border {
+            border-color: red;
+        }
+
+        #errors-div {
+            background: #ffe0e0;
+            color: #950B02;
+            padding: 0;
+            height: 0;
+            transition: height 2s;
+        }
+
+        #errors-div p{
+            margin: 0;
+            padding: 0;
+        }
+
+        #fee-reduction {
+            max-width: 400px;
+            border: black solid 1px;
+            border-collapse: collapse;
+        }
+
+        #fee-reduction td {
+            border: black solid 1px;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        #fee-reduction th {
+            border: black solid 1px;
+            border-collapse: collapse;
+        }
+        #q2 {
+            display: none;
+        }
+        #q3 {
+            display: none;
+        }
+        #q4 {
+            display: none;
+        }
+        #eruTable {
+            color: #2c2c2c;
+            font-size:16px;
+            text-shadow: 1px 1px 0 #fff;
+            background:#eaebec;
+            margin:20px;
+            border:rgb(0, 0, 0) 1px solid;
+            border-spacing: 0;
+            /*border-collapse: collapse;*/
+            -moz-border-radius:3px;
+            -webkit-border-radius:3px;
+            border-radius:3px;
+
+            -moz-box-shadow: 0 1px 2px #d1d1d1;
+            -webkit-box-shadow: 0 1px 2px #d1d1d1;
+            box-shadow: 0 1px 2px #d1d1d1;
+        }
+        #eruTable td th{
+            border-left:rgb(0, 0, 0) 1px solid;
+            border-right:rgb(0, 0, 0) 1px solid;
+            border-top:rgb(0, 0, 0) 1px solid;
+            border-bottom:rgb(0, 0, 0) 1px solid;
+        }
+        .question {
+            display: none;
+        }
+        #updateButton {
+            display: none;
+        }
+    </style>
+    <script>
+        var current_step = 1;
+        var irrPrice = 0.735;
+        var stateWaterPlan = 0.0032;
+        //var meter_selection = document.getElementById("meter_size");
+        //true  = Inside city limits, false = outside
+        var price_list = [
+            {"true":4.40, "false":4.80},
+            {"true":5.25, "false":5.80},
+            {"true":6.05, "false":6.65},
+            {"true":8.35, "false":9.20},
+            {"true":25, "false":27.50},
+            {"true":31.10, "false":34.20},
+            {"true":46.20, "false":50.85},
+            {"true":62.10, "false":68.30},
+            {"true":81.50, "false":89.65},
+            {"true":94.85, "false":104.30},
+            {"true":126.50, "false":139.15},
+            {"true":4.40, "false":4.80},
+        ];
+        //monthly sewer service charge
+        var sewer_charge = {"true": 14.85, "false": 16.30};
+        var current_storm_water_base = [
+            {'ERU':.37, 'charge':2.50},
+            {'ERU':.66, 'charge':4.46},
+            {'ERU':.67, 'charge':4.52},
+            {'ERU':1, 'charge':6.75},
+            {'ERU':1.25, 'charge':8.44},
+            {'ERU':1.8, 'charge':12.15},
+            {'ERU':2.5, 'charge':16.88},
+        ]
+        var last_year_storm_water_base = [
+            {'ERU':.37, 'charge':1.67},
+            {'ERU':.66, 'charge':2.97},
+            {'ERU':.67, 'charge':3.02},
+            {'ERU':1, 'charge':4.50},
+            {'ERU':1.25, 'charge':5.63},
+            {'ERU':1.8, 'charge':8.10},
+            {'ERU':2.5, 'charge':11.25},
+        ]
+        var formatDollar = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 2
+        });
+        var eru_table = function(current_year){
+            //var tableBody = document.getElementById('eru_prices');
+            var table_div = document.getElementById('eruTable');
+            try {
+                table_div.innerHTML = ""
+            }
+            catch(err){
+                console.log(err)
+            }
+            finally{
+                console.log("Updating ERU chart")
+            }
+            var newBody = document.createElement("tbody");
+            newBody.id = "eru_prices";
+            var row = document.createElement("tr");
+            var leftLabel = document.createElement("th");
+            leftLabel.textContent = "Price"
+            var rightLabel = document.createElement("th");
+            rightLabel.textContent = "Corresponding ERU"
+            //table_div.removeChild("td")
+            //begin constructing table here:
+            row.appendChild(leftLabel)
+            row.appendChild(rightLabel)
+            newBody.appendChild(row)
+            table_div.appendChild(newBody)
+            if (current_year){
+                for(var i = 0; i< current_storm_water_base.length; i++){
+                    var tableBody = document.getElementById('eru_prices');
+                    var row = document.createElement("tr");
+                    var price = document.createElement("td");
+                    price.textContent = "$" + current_storm_water_base[i].charge.toString()
+                    var eru_value = document.createElement("td");
+                    eru_value.textContent = current_storm_water_base[i].ERU
+                    row.appendChild(price)
+                    row.appendChild(eru_value)
+                    tableBody.appendChild(row)
+                    table_div.appendChild(tableBody)
+                }
+
+            }
+            else{
+                for(var i = 0; i< last_year_storm_water_base.length; i++){
+                    var tableBody = document.getElementById('eru_prices');
+                    var row = document.createElement("tr");
+                    var price = document.createElement("td");
+                    price.textContent = "$" + last_year_storm_water_base[i].charge.toString()
+                    var eru_value = document.createElement("td");
+                    eru_value.textContent = last_year_storm_water_base[i].ERU
+                    row.appendChild(price)
+                    row.appendChild(eru_value)
+                    tableBody.appendChild(row)
+                    table_div.appendChild(tableBody)
+                }
+            }
+        };
+        //Solid Waste rates
+        //var trash_cart = {"35g":17.82, "65g":19.36, "95g": 21.42, "lowIncome":6.78};
+        var in_city_limits = true;
+        var trash_cart = [17.82, 19.36, 21.42, 6.78];
+        var additional65 = 3.86;
+        var additional95 = 4.89;
+        //var location = document.querySelector("input[name='prequestion']:checked").value;
+        /* let select_size = function(){
+            var location = in_city_limits
+            console.log(location)
+            var selection = document.getElementById('meter_size')
+            console.log(selection)
+            var selectionValue = selection.selectedIndex
+            console.log(selectionValue)
+            //var location = document.getElementById('1_q').selectedIndex;
+            //var price = price_list[selection.selectedIndex].location;
+            var pricePair = price_list[selection.selectedIndex]
+            console.log(price_list)
+            console.log(price_list[selection.selectedIndex])
+            var price = price_list[selectionValue].in_city_limits
+            return price;
+        }; */
+        var reveal = function(){
+            var inside = document.getElementById('Inside');
+            var form = document.getElementById("row-form");
+            form.style = "display : block";
+            if (inside.checked){
+                in_city_limits = true;
+                console.log(in_city_limits)
+            }
+            else{
+                in_city_limits = false;
+                console.log(in_city_limits)
+            };
+        };  
+
+        var disableSewerVolume = function(bool){
+            var sewerDiv = document.getElementById("sewerVolume");
+            sewerDiv.disabled = bool
+            if (bool === false){
+                sewerDiv.value = 0
+            }
+
+        }
+        
+
+        var update_costs = function(){
+            //cost variables
+            var total = 0;
+            var WQA = document.getElementById("WQA").value;
+            var waterUsed = document.getElementById("waterUsed").value;
+            var ERU = document.getElementById("eru").value;
+            var eru_index = document.getElementById("eru").selectedIndex;
+            //Water base charge
+            var selected_meter = document.getElementById('waterMeter').value
+            var meterCharge = '';
+            if (in_city_limits){
+                meterCharge = price_list[selected_meter].true
+            }
+            else{
+                meterCharge = price_list[selected_meter].false
+            }
+
+            console.log(meterCharge)
+            //Water Volume Charge 
+            var totalWaterVolume = (waterUsed * irrPrice) + (waterUsed * stateWaterPlan);
+            //per Josh for the water charges, the minimum WQA you can pay for is 30 as of 2021
+            if(WQA <30){
+                totalWaterVolume = (30 * irrPrice) + (30 * stateWaterPlan)
+            }
+
+            //sewer base calculation
+            var sewerBaseCharge = '';
+            var connectedSewer = document.getElementById("sewerY")
+            var disconnectedSewer = document.getElementById("sewerN")
+            var sewerDiv = document.getElementById("sewerVolume");
+            var sewerVolume = sewerDiv.valueAsNumber;
+            console.log(sewerVolume)
+            if (connectedSewer.checked){
+                disableSewerVolume(false)
+                if (in_city_limits){
+                sewerBaseCharge = sewer_charge.true
+                }
+                else{
+                    sewerBaseCharge = sewer_charge.false
+                }
+            }
+            if(disconnectedSewer.checked){
+                sewerBaseCharge = 0
+                sewerVolume = 0
+            }
+
+            //sewer volume calculation based on WQA
+            if (sewerVolume<WQA){
+                sewerVolume = WQA
+            }
+            var sewerVolumeCost = sewerVolume * 0.8730;
+            console.log(sewerVolumeCost)
+
+            //Storm Water Base
+            var stormBaseCharge = current_storm_water_base[eru_index].charge;
+
+            //Solid Waste
+            var cartSize = document.getElementById("mainCart").selectedIndex;
+            var additionalMed = document.getElementById("sixtyFive").value;
+            var additionalLarge = document.getElementById("nintyFive").value;
+            var solidWasteFee = trash_cart[cartSize];
+            var moreCarts = (additionalMed*additional65) + (additionalLarge*additional95);
+
+            //Create and display table
+            var meterChargeDiv = document.getElementById('meterCharge')
+            meterChargeDiv.textContent = formatDollar.format(meterCharge);
+            var waterVolume = document.getElementById("waterVolume");
+            waterVolume.textContent = formatDollar.format(totalWaterVolume);
+            var sewerBaseDiv = document.getElementById("sewerBase");
+            sewerBaseDiv.textContent = formatDollar.format(sewerBaseCharge);
+            var sewerVolumeDiv = document.getElementById("sewerVolumeCharge");
+            sewerVolumeDiv.innerHTML = formatDollar.format(sewerVolumeCost);
+            var stormBase = document.getElementById("stormBase");
+            stormBase.textContent = formatDollar.format(stormBaseCharge);
+            var solidWaste = document.getElementById("solidWaste");
+            var totalSolidWaste = solidWasteFee + moreCarts;
+            solidWaste.textContent = formatDollar.format(totalSolidWaste);
+            //total cost
+            var totalDiv = document.getElementById('total')
+            var runningTotal = meterCharge + totalWaterVolume + sewerBaseCharge + sewerVolumeCost + stormBaseCharge + totalSolidWaste
+            totalDiv.innerHTML = formatDollar.format(runningTotal)
+        
+        };
+        var update_eru_chart = function(){
+            var true_radio = document.getElementById("currentYearTrue");
+            //var false_radio = document.getElementById("currentYearFalse");
+            if (true_radio.checked){
+                eru_table(true)
+            }
+            else{
+                eru_table(false)
+            };
+        };
+
+        var next_step = function(){
+            current_step = current_step +1;
+            if (current_step == 4){
+                update_eru_chart()
+            }
+            if(current_step == 5){
+                update_costs()
+                var targetButton = document.getElementById("nextButton");
+                targetButton.style = "display: none";
+                var updateButton = document.getElementById("updateButton");
+                updateButton.style = "display: block";
+            }
+            var div_name = "question_"+String(current_step);
+            var next_div = document.getElementById(div_name);
+            next_div.style = "display : block";
+            
+        };
+    </script>
+</head>
+<body>
+    <div id = "content">
+        <div id = "left">
+            <h1>Utilities fee estimator</h1>
+            <br>
+            <h4>This calculator is set up for residential customers. Bills for customers in apartments or multi-family dwellings and commercial customers vary by situation. If you live in an apartment or multi-family dwelling, or you are a residential customer, please call the Utility Billing office for more information about your utility bill.
+
+                *This calculator is for estimate purposes only. Charges may vary on actual bill*
+                
+                To more accurately estimate your bill, select whether your property is inside city limits or outside city limits. 
+                </h4>
+            <div id = "errors-div"></div>
+            <div id = "questionaire">
+            <form id = "formDiv">
+                <div id = "1_q" onclick="reveal()">
+                    <p>
+                    Is your property inside or outside Lawrence City Limits? 
+                    </p>
+                    <input type = "radio" name = "prequestion" id = "Inside" value = 'true'>
+                    <label for="Inside">Inside</label><br>
+                    <input type = "radio" name="prequestion" id = "Outside" value = 'false'>
+                    <label for = "Outside">Outside</label>
+                    <br>  
+                </div>
+            </form>
+            </div>
+            <!--Start of the actual questions-->
+            <form action="#" method="post" onsubmit="return false;" id="row-form" class="row-form" style = "display : none;">
+                <h1>Water/ IRR Monthly Base Charge</h1>
+                <div id = "question_1">
+                    <h4>What is the size of your meter?</h4>
+                    <label for="size">Choose a size: </label>
+                    <select name="size" id="waterMeter" onclick="select_size()">
+                        <option value="0">5/8 and 3/4 Inch</option>
+                        <option value="1">1 Inch</option>
+                        <option value="2">1 1/2 Inch</option>
+                        <option value="3">2 Inch</option>
+                        <option value="4">3 Inch</option>
+                        <option value="5">4 Inch</option>
+                        <option value="6">6 Inch</option>
+                        <option value="7">8 Inch</option>
+                        <option value="8">10 Inch</option>
+                        <option value="9">12 Inch</option>
+                        <option value="10">15 Inch</option>
+                        <option value="11">Multi-Family (Per Unit)</option>
+                    </select>
+                </div>
+                <div id="question_2" class="question">
+                <h1>Water/IRR - Volume Charge</h1>
+                    <h4>Please enter the amount of water used: </h4>
+                    <label for="volume">Please enter your water usage amount: </label>
+                    <input name="volume" type="number" id = "waterUsed">
+                </div>
+                <div id="question_3" class="question">
+                    <h1>Sewer base charge</h1>
+                    <h4>Is your septic system connected to the city's sewer line?</h4>
+                    <label for="sewerY">Yes</label>
+                    <input id="sewerY" name = "sewerYN" type="radio" value='true' onclick="disableSewerVolume(false)">
+                    <label for="sewerN">No</label>
+                    <input type="radio" name="sewerYN" id="sewerN" value = 'false' onclick="disableSewerVolume(true)">
+                    <label for="WQA">Please enter your WQA (Winter Quarter Average): </label>
+                    <input name="WQA" type="number" id = "WQA">
+                    <br>
+                    <h1>Sewer volume charge</h1>
+                    <h4>If a customer’s water usage is less than their WQA the customer's sewer volume is used instead of actual water usage.</h4>
+                    <label for="sewerVolume">Sewer volume amount</label>
+                    <input type="number" name="sewerVolume" id = 'sewerVolume'>
+                </div>
+                <div id="question_4" class="question">
+                    <h1>Storm Water Base Charge</h1>
+                    <h4>What is your location's ERU?</h4>
+                    <label for="eru">ERU rating: </label>
+                    <select name="eru" id="eru">
+                        <option value=".37">0.37</option>
+                        <option value=".66">0.66</option>
+                        <option value=".67">0.67</option>
+                        <option value="1">1.00</option>
+                        <option value="1.25">1.25</option>
+                        <option value="1.8">1.80</option>
+                        <option value="2.5">2.50</option>
+                    </select>
+                    <div id="eru_chart" onclick = "update_eru_chart()">
+                        <label for="currentYearTrue">Display Chart for 2021 Prices: </label>
+                        <input type="radio" name = 'year' value = 'true' id="currentYearTrue" checked = "checked">
+                        <label for="currentYearFalse">Display chart for 2020 prices: </label>
+                        <input type="radio" name="year" value="false" id="currentYearFalse">
+                        <table id = "eruTable">
+                            <!-- <tbody id = "eru_prices">
+                                <tr>
+                                    <th>Price</th>
+                                    <th>Corresponding ERU</th>
+                                </tr>
+                            </tbody> -->
+                        </table>
+                    </div>
+                </div>
+                <div id="question_5" class="question">
+                    <h1>Solid Waste Charge</h1>
+                    <h4>Please enter level of trash service</h4>
+                    <label for="mainCart"></label>
+                    <select name="mainCart" id="mainCart">
+                        <option value="0">35 Gallon cart</option>
+                        <option value="1">65 Gallon cart</option>
+                        <option value="2">95 Gallon cart</option>
+                        <option value="3">Low Income Rate</option>
+                    </select>
+                    <h4>Please enter the number of additional carts you have: </h4>
+                    <!-- <label for="thirtyFive">Additional 35 Gallon Carts</label>
+                    <input type="number" name="thirtyFive" id="thirtyFive" placeholder="0">
+                    <br> -->
+                    <label for="sixtyFive">Additional 65 Gallon Carts</label>
+                    <input type="number" name="sixtyFive" id="sixtyFive" placeholder="0">
+                    <br>
+                    <label for="nintyFive">Additional 95 Gallon Carts</label>
+                    <input type="number" name="nintyFive" id="nintyFive" placeholder="0">
+                </div>
+                <input type="button" value="Next" onclick="next_step()" id = "nextButton">
+                <input type="button" value = "Update Cost Table" onclick="update_costs()" id = "updateButton">
+            </form>
+        </div>
+        <div id = "right">
+            <table id = 'cost-table'>
+                <!--Auto generated table goes here-->
+                <tbody>
+                    <tr>
+                        <th>Line Item</th>
+                        <th>Estimated Price</th>
+                    </tr>
+                    <tr>
+                        <td>Water Base Charge</td>
+                        <td id = "meterCharge"></td>
+                    </tr>
+                    <tr>
+                        <td>Water Volume</td>
+                        <td id ="waterVolume"></td>
+                    </tr>
+                    <tr>
+                        <td>Sewer Base Charge</td>
+                        <td id = "sewerBase"></td>
+                    </tr>
+                    <tr>
+                        <td>Sewer Volume Charge</td>
+                        <td id = "sewerVolumeCharge"></td>
+                    </tr>
+                    <tr>
+                        <td>Storm Water Charge</td>
+                        <td id = "stormBase"></td>
+                    </tr>
+                    <tr>
+                        <td>Solid Waste</td>
+                        <td id = "solidWaste"></td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td id = "total"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
