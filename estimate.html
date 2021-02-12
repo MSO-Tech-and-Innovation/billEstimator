@@ -280,6 +280,11 @@
         var current_step = 1;
         var irrPrice = 0.735;
         var stateWaterPlan = 0.0032;
+        //Minimum average winter consumption
+        var minAveWin = 30;
+        var block1 = 0
+        var block2 = 0
+        var block3 = 0
         //var meter_selection = document.getElementById("meter_size");
         //true  = Inside city limits, false = outside
         var price_list = [
@@ -441,12 +446,60 @@
 
             console.log(meterCharge)
             //Water Volume Charge 
-            var totalWaterVolume = (waterUsed * irrPrice) + (waterUsed * stateWaterPlan);
+            
             //per Josh for the water charges, the minimum WQA you can pay for is 30 as of 2021
-            if(WQA <30){
-                totalWaterVolume = (30 * irrPrice) + (30 * stateWaterPlan)
-            }
+            //Josh's instructions are an oversimplification
 
+            //block 1
+            //If your winter quarterly average is greater than the minimum WQA
+            if(WQA >minAveWin){
+                //and the amount used is greater than 1.25 times your WQA
+                if(waterUsed >WQA*1.25){
+                    //Then your block1 rate is 1.25 times your water used
+                    block1 = waterUsed * 1.25
+                }
+                if(waterUsed > minAveWin*1.25){
+                    block1 = minAveWin*1.25
+                }
+                else{
+                    block1 = waterUsed
+                }
+            }
+            //block 2
+            if (WQA > minAveWin){
+                if(waterUsed > WQA *2){
+                    block2 = (WQA *2) - (WQA *1.25);
+                    if(waterUsed > WQA*1.25){
+                        block2 = waterUsed - (WQA*1.25)
+                    }
+                    else{
+                        block2 = 0
+                    }
+                }
+                if(waterUsed > (minAveWin*2)){
+                    block2 = (minAveWin*2) - (minAveWin*1.25)
+                }
+                if(waterUsed >minAveWin*1.25){
+                    block2 = waterUsed - (minAveWin*1.25)
+                }
+                else{
+                    block2 = 0
+                }
+            }
+            //block 3
+            if (WQA > minAveWin){
+                if(waterUsed > (WQA*2)){
+                    block3 = (waterUsed - (WQA*2))
+                }
+                else{
+                    block3 = 0
+                }
+                if(waterUsed > (minAveWin*2)){
+                    //last arguement of the excel spreadsheet
+                    block3 = (waterUsed - (minAveWin*2))
+                }
+            }
+            var totalWaterVolume = (waterUsed * irrPrice) + (waterUsed * stateWaterPlan);
             //sewer base calculation
             var sewerBaseCharge = '';
             var connectedSewer = document.getElementById("sewerY")
