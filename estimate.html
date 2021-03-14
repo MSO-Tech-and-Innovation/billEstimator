@@ -478,25 +478,30 @@
                 if(waterUsed>WQA*2){
                     block2 = (WQA*2)-(WQA*1.25)
                 }
-                if(waterUsed>WQA*1.25){
-                    block2 = waterUsed-(WQA*1.25)
+                else{
+                    if(waterUsed>WQA*1.25){
+                        block2 = waterUsed-(WQA*1.25)
+                    }
+                    else{
+                        block2 = 0
+                    }
                 }
-                else
-                block2 = 0
+
             }
             else{
                 if(waterUsed>minAveWin*2){
                     block2 = (minAveWin*2)-(minAveWin*1.25)
 
                 }
-                if(waterUsed>minAveWin*1.25){
+                else{
+                    if(waterUsed>minAveWin*1.25){
                         block2 = waterUsed-(minAveWin*1.25)
                     }
                 else{
                     block2 = 0
 
-            }}
-            };
+            }}}};
+
 
 //block 3
             var getblock3 = function(){
