@@ -275,6 +275,68 @@
         #updateButton {
             display: none;
         }
+        #billHead {
+            width: 278pt;
+            column-span: 2;
+            -ms-grid-row-span: 3;
+            background-color: #000080;
+        }
+        .s4 { 
+        color: #000080; 
+        font-family:Arial, sans-serif; 
+        font-style: normal; 
+        font-weight: bold; 
+        text-decoration: none; 
+        font-size: 7.5pt; 
+        padding-top: 1pt;
+        padding-left: 3pt;
+        text-indent: 0pt;
+        line-height: 8pt;
+        text-align: left;
+        }
+        .s5 { 
+            color: #FFF; 
+            font-family:Arial, 
+            sans-serif; 
+            font-style: normal; 
+            font-weight: bold; 
+            text-decoration: none; 
+            font-size: 7.5pt; 
+            text-align: center;
+        }
+        .chargeTitle{
+            background-color: #b4cffd;
+        }
+        .borderBox{
+            width:231pt;
+            border-left-style:solid;
+            border-left-width:2pt;
+            border-left-color:#000080;
+            border-bottom-style:solid;
+            border-bottom-width:1pt;
+            border-bottom-color:#000080
+        }
+        .TotalAmounts{
+            width:47pt;
+            border-bottom-style:solid;
+            border-bottom-width:1pt;
+            border-bottom-color:#000080;
+            border-right-style:solid;
+            border-right-width:1pt;
+            border-right-color:#000080
+        }
+        .s2 { 
+            color: black; 
+            font-family:Arial, sans-serif; 
+            font-style: normal; 
+            font-weight: normal; 
+            text-decoration: none; 
+            font-size: 8pt; 
+            padding-top: 1pt;
+            padding-left: 4pt;
+            text-indent: 0pt;
+            text-align: left;
+        }
     </style>
     <script>
         var current_step = 1;
@@ -388,27 +450,12 @@
             }
         };
         //Solid Waste rates
-        //var trash_cart = {"35g":17.82, "65g":19.36, "95g": 21.42, "lowIncome":6.78};
+
         var in_city_limits = true;
         var trash_cart = [17.82, 19.36, 21.42, 6.78];
         var additional65 = 3.86;
         var additional95 = 4.89;
-        //var location = document.querySelector("input[name='prequestion']:checked").value;
-        /* let select_size = function(){
-            var location = in_city_limits
-            console.log(location)
-            var selection = document.getElementById('meter_size')
-            console.log(selection)
-            var selectionValue = selection.selectedIndex
-            console.log(selectionValue)
-            //var location = document.getElementById('1_q').selectedIndex;
-            //var price = price_list[selection.selectedIndex].location;
-            var pricePair = price_list[selection.selectedIndex]
-            console.log(price_list)
-            console.log(price_list[selection.selectedIndex])
-            var price = price_list[selectionValue].in_city_limits
-            return price;
-        }; */
+
         var reveal = function(){
             var inside = document.getElementById('Inside');
             var form = document.getElementById("row-form");
@@ -449,9 +496,7 @@
             }
 
             //Water Volume Charge 
-            
-            //per Josh for the water charges, the minimum WQA you can pay for is 30 as of 2021
-            //Josh's instructions are an oversimplification
+
             //block 1
             //If your winter quarterly average is greater than the minimum WQA
             //translation from excel
@@ -473,6 +518,7 @@
             };
 
 //block 2
+//=IF(F$2>P$2,IF(F$4>F$2*2,F$2*2-F$2*1.25,IF(F$4>F$2*1.25,F$4-F$2*1.25,0)),IF(F$4>P$2*2,P$2*2-P$2*1.25,IF(F$4>P$2*1.25,F$4-P$2*1.25,0)))
             var getblock2 = function(){
             if(WQA>minAveWin){
                 if(waterUsed>WQA*2){
@@ -649,7 +695,6 @@
         };
         var update_eru_chart = function(){
             var true_radio = document.getElementById("currentYearTrue");
-            //var false_radio = document.getElementById("currentYearFalse");
             if (true_radio.checked){
                 eru_table(true)
             }
@@ -806,9 +851,9 @@
                         <th>Line Item</th>
                         <th>Estimated Price</th>
                     </tr>
-                    <tr>
+<!--                     <tr>
                         <td>Water Base Charge</td>
-                        <td id = "meterCharge"></td>
+                        <td id = "meterCharge"></td> 
                     </tr>
                     <tr>
                         <td>Water Volume</td>
@@ -820,7 +865,7 @@
                                 <li id ="waterVolume"></li>
                             </ul>
                         </td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <td>Sewer Base Charge</td>
                         <td id = "sewerBase"></td>
@@ -840,6 +885,33 @@
                     <tr>
                         <td>Total</td>
                         <td id = "total"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table id = "billTable">
+                <tbody>
+                    <tr>
+                        <td id="billHead">
+                            <p class="s5">Current Charges</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="chargeTitle">
+                            <p class="s4">Water</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="borderBox">
+                            <p class="s2">Water/IRR - Monthly Base Charge</p>
+                            <p class="s2">Water/IRR - Volume Charge </p>
+                        </td>
+                        <td class="TotalAmounts">
+                            <p id="meterCharge" class="s2"></p>
+                            <p id ="block1"class="s2"></p>
+                            <p id ="block2"class="s2"></p>
+                            <p id ="block3"class="s2"></p>
+                            <p id ="waterVolume"class="s2"></p>
+                        </td>
                     </tr>
                 </tbody>
             </table>
