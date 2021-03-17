@@ -337,6 +337,9 @@
             text-indent: 0pt;
             text-align: left;
         }
+        .s2 div{
+            text-align: right;
+        }
     </style>
     <script>
         var current_step = 1;
@@ -844,14 +847,14 @@
             </form>
         </div>
         <div id = "right">
-            <table id = 'cost-table'>
-                <!--Auto generated table goes here-->
+<!--             <table id = 'cost-table'>
+                Auto generated table goes here
                 <tbody>
                     <tr>
                         <th>Line Item</th>
                         <th>Estimated Price</th>
-                    </tr>
-<!--                     <tr>
+                    </tr> 
+                   <tr>
                         <td>Water Base Charge</td>
                         <td id = "meterCharge"></td> 
                     </tr>
@@ -866,7 +869,7 @@
                             </ul>
                         </td>
                     </tr> -->
-                    <tr>
+<!--                     <tr>
                         <td>Sewer Base Charge</td>
                         <td id = "sewerBase"></td>
                     </tr>
@@ -887,9 +890,9 @@
                         <td id = "total"></td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
             <table id = "billTable">
-                <tbody>
+                <tbody class="TotalAmounts">
                     <tr>
                         <td id="billHead">
                             <p class="s5">Current Charges</p>
@@ -897,20 +900,63 @@
                     </tr>
                     <tr>
                         <td class="chargeTitle">
-                            <p class="s4">Water</p>
+                            <p class="s4">WATER</p>
                         </td>
                     </tr>
                     <tr>
                         <td class="borderBox">
-                            <p class="s2">Water/IRR - Monthly Base Charge</p>
-                            <p class="s2">Water/IRR - Volume Charge </p>
+                            <p class="s2">Water Charges Block 1<span id ="block1"class="s2"></span></p>
+                            <p class="s2">Water Charges Block 2<span id ="block2"class="s2"></span></p>
+                            <p class="s2">Water Charges Block 3<span id ="block3"class="s2"></span></p>
+                            <p class="s2">Water/IRR - Monthly Base Charge<span id="meterCharge" class="s2"></span></p>
+                            <p class="s2">Water/IRR - Volume Charge <span id ="waterVolume"class="s2"></span></p>
                         </td>
-                        <td class="TotalAmounts">
-                            <p id="meterCharge" class="s2"></p>
-                            <p id ="block1"class="s2"></p>
-                            <p id ="block2"class="s2"></p>
-                            <p id ="block3"class="s2"></p>
-                            <p id ="waterVolume"class="s2"></p>
+                        <td>
+                            
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="chargeTitle">
+                            <p class="s4">SEWER</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="borderBox">
+                            <p class="s2">Sewer - Base Charge<span class="s2" id="sewerBase"></span></p>
+                            <p class="s2">Sewer - Volume Charge<span class="s2" id="sewerVolumeCharge"></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="chargeTitle">
+                            <p class="s4">STORMWATER</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="borderBox">
+                            <p class="s2">Storm Water - Base Charge<span class="s2" id="stormBase"></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="chargeTitle">
+                            <p class="s4">SOLID WASTE AND RECYCLING</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="borderBox">
+                            <p class="s2">Solid Waste - Cart<span class="s2" id="solidWaste"></span></p>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="chargeTitle">
+                            <p class="s4">MISCELLANEOUS CHARGES</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="borderBox">
+                            <p class="s2">Total<span class="s2" id="total"></span></p>  
                         </td>
                     </tr>
                 </tbody>
