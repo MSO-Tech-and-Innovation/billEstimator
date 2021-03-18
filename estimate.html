@@ -674,8 +674,8 @@
             //Create and display table
             var meterChargeDiv = document.getElementById('meterCharge')
             meterChargeDiv.textContent = formatDollar.format(meterCharge);
-            var waterVolume = document.getElementById("waterVolume");
-            waterVolume.textContent = formatDollar.format(totalWaterVolume);
+            //var waterVolume = document.getElementById("waterVolume");
+            //waterVolume.textContent = formatDollar.format(totalWaterVolume);
             var stateFeeDiv = document.getElementById("stateFee");
             stateFeeDiv.textContent = formatDollar.format(stateFee);
             var block1Div = document.getElementById("block1");
@@ -712,7 +712,7 @@
         var next_step = function(){
             current_step = current_step +1;
             if (current_step == 4){
-                update_eru_chart()
+                //update_eru_chart()
             }
             if(current_step == 5){
                 update_costs()
@@ -739,6 +739,8 @@
                 
                 To more accurately estimate your bill, select whether your property is inside city limits or outside city limits. 
                 </h4>
+                <br>
+                <h4><strong>For information on where to find each category below on your bill, <a href="https://lawrenceks.org/utility-bill-example-block-rate-calculator/">view an example bill</a></strong></h4>
             <div id = "errors-div"></div>
             <div id = "questionaire">
             <form id = "formDiv">
@@ -810,20 +812,14 @@
                         <option value="1.8">1.80</option>
                         <option value="2.5">2.50</option>
                     </select>
-                    <div id="eru_chart" onclick = "update_eru_chart()">
+                    <!-- <div id="eru_chart" onclick = "update_eru_chart()">
                         <label for="currentYearTrue">Display Chart for 2021 Prices: </label>
                         <input type="radio" name = 'year' value = 'true' id="currentYearTrue" checked = "checked">
                         <label for="currentYearFalse">Display chart for 2020 prices: </label>
                         <input type="radio" name="year" value="false" id="currentYearFalse">
                         <table id = "eruTable">
-                            <!-- <tbody id = "eru_prices">
-                                <tr>
-                                    <th>Price</th>
-                                    <th>Corresponding ERU</th>
-                                </tr>
-                            </tbody> -->
                         </table>
-                    </div>
+                    </div> -->
                 </div>
                 <div id="question_5" class="question">
                     <h1>Solid Waste Charge</h1>
@@ -912,7 +908,7 @@
                             <p class="s2">Water Charges Block 2<span id ="block2"class="s2"></span></p>
                             <p class="s2">Water Charges Block 3<span id ="block3"class="s2"></span></p>
                             <p class="s2">Water/IRR - Monthly Base Charge<span id="meterCharge" class="s2"></span></p>
-                            <p class="s2">Water/IRR - Volume Charge <span id ="waterVolume"class="s2"></span></p>
+                            <!-- <p class="s2">Water/IRR - Volume Charge <span id ="waterVolume"class="s2"></span></p> -->
                             <p class="s2">State Wate Plan Fee <span id ="stateFee"class="s2"></span></p>
                         </td>
                         <td>
@@ -955,7 +951,7 @@
                     </tr>
                     <tr>
                         <td class="chargeTitle">
-                            <p class="s4">MISCELLANEOUS CHARGES</p>
+                            <p class="s4">Total Estimated Bill Charges</p>
                         </td>
                     </tr>
                     <tr>
