@@ -503,7 +503,7 @@
             //block 1
             //If your winter quarterly average is greater than the minimum WQA
             //translation from excel
-            var getblock1 = function(){
+            var getblock1 = function(WQA, minAveWin, waterUsed){
             if(WQA>minAveWin){
                 if (waterUsed>(WQA*1.25)){
                    block1 = WQA*1.25
@@ -512,7 +512,7 @@
                     block1 = waterUsed
                 }
             }
-            if(waterUsed>minAveWin*1.25){
+            else if(waterUsed>minAveWin*1.25){
                 block1 = minAveWin*1.25
             }
             else{
@@ -556,18 +556,18 @@
             var getblock3 = function(){
             if(WQA>minAveWin){
                 if(waterUsed>WQA*2){
-                    block3 = waterUsed-WQA*2
-                } 
+                    block3 = waterUsed-(WQA*2)
+                }
                 else{
                     block3 = 0;
-                }
+                };
             }
-            if(waterUsed>minAveWin*2){
-                    block3 = waterUsed-minAveWin*2
+            else if(waterUsed>minAveWin*2){
+                    block3 = waterUsed-(minAveWin*2)
                 }
             else
                 block3 = 0};
-            getblock1();
+            getblock1(WQA, minAveWin, waterUsed);
             getblock2();
             getblock3();
             /* 
@@ -628,9 +628,9 @@
             } */
 
             //var totalWaterVolume = (waterUsed * irrPrice) + (waterUsed * stateWaterPlan);
-            var subtotal1 = (block1/10) * price1
-            var subtotal2 = (block2/10) * price2
-            var subtotal3 = (block3/10) * price3
+            var subtotal1 = ((block1/10) * price1)
+            var subtotal2 = ((block2/10) * price2)
+            var subtotal3 = ((block3/10) * price3)
             var totalWaterVolume = subtotal1 + subtotal2 + subtotal3
             console.log("Block1:",block1,"Block 2:", block2,"Block 3:", block3)
             var stateFee = waterUsed * 0.0032;
