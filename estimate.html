@@ -633,6 +633,7 @@
             var subtotal3 = (block3/10) * price3
             var totalWaterVolume = subtotal1 + subtotal2 + subtotal3
             console.log("Block1:",block1,"Block 2:", block2,"Block 3:", block3)
+            var stateFee = waterUsed * 0.0032;
             //sewer base calculation
             var sewerBaseCharge = '';
             var connectedSewer = document.getElementById("sewerY")
@@ -675,6 +676,8 @@
             meterChargeDiv.textContent = formatDollar.format(meterCharge);
             var waterVolume = document.getElementById("waterVolume");
             waterVolume.textContent = formatDollar.format(totalWaterVolume);
+            var stateFeeDiv = document.getElementById("stateFee");
+            stateFeeDiv.textContent = formatDollar.format(stateFee);
             var block1Div = document.getElementById("block1");
             block1Div.textContent = formatDollar.format(subtotal1);
             var block2Div = document.getElementById("block2");
@@ -692,7 +695,7 @@
             solidWaste.textContent = formatDollar.format(totalSolidWaste);
             //total cost
             var totalDiv = document.getElementById('total')
-            var runningTotal = meterCharge + totalWaterVolume + sewerBaseCharge + sewerVolumeCost + stormBaseCharge + totalSolidWaste
+            var runningTotal = meterCharge + totalWaterVolume + sewerBaseCharge + sewerVolumeCost + stormBaseCharge + totalSolidWaste + stateFee
             totalDiv.innerHTML = formatDollar.format(runningTotal)
         
         };
@@ -910,6 +913,7 @@
                             <p class="s2">Water Charges Block 3<span id ="block3"class="s2"></span></p>
                             <p class="s2">Water/IRR - Monthly Base Charge<span id="meterCharge" class="s2"></span></p>
                             <p class="s2">Water/IRR - Volume Charge <span id ="waterVolume"class="s2"></span></p>
+                            <p class="s2">State Wate Plan Fee <span id ="stateFee"class="s2"></span></p>
                         </td>
                         <td>
                             
