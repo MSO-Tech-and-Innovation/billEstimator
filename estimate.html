@@ -645,19 +645,34 @@
                 sewerBaseCharge = 0
                 sewerVolume = 0
             } */
-            if (in_city_limits){
+            var getSewerBase = function(){
+                if (in_city_limits){
                 sewerBaseCharge = sewer_charge.true
-            }
-            else{
-                sewer_charge.false
+                }
+                else{
+                    sewer_charge.false
+                };
             };
+
             //sewer volume calculation based on WQA
-            if (waterUsed<WQA){
-                sewerVolume = waterUsed
-            }
-            else {
-                sewerVolume = WQA
+            var getSewerVol = function(){
+                console.log("water used "+waterUsed)
+                console.log("WQA"+WQA)
+                waterUsed = Number(waterUsed);
+                WQA = Number(WQA);
+                if (waterUsed<WQA){
+                    sewerVolume = waterUsed;
+                    console.log(sewerVolume);
+                    console.log("Less than WQA");
+                }
+                else if (waterUsed>=WQA) {
+                    sewerVolume = WQA
+                    console.log(sewerVolume)
+                    console.log("More than WQA")
+                };
             };
+            getSewerBase();
+            getSewerVol();
             var sewerVolumeCost = sewerVolume * 0.8730;
             console.log("Sewer Volume Cost: ", sewerVolumeCost)
 
