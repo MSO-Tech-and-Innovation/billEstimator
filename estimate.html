@@ -4,6 +4,7 @@
     <title>Utilities Calculator</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" id="x-child-css" href="https://cdn.lawrenceks.org/wp-content/themes/pro-child/style.css?ver=2.5.5" type="text/css" media="all">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.classList"></script>
     <style>
 
@@ -737,8 +738,9 @@
     </script>
 </head>
 <body>
-    <div id = "content">
-        <div id = "left">
+    <div id = "container">
+    <div class="row">
+        <div  class = "col-lg-9">
             <h1>Utilities fee estimator</h1>
             <br>
             <h4>This calculator is set up for residential customers. Bills for customers in apartments or multi-family dwellings and commercial customers vary by situation. If you live in an apartment or multi-family dwelling, or you are a residential customer, please call the Utility Billing office for more information about your utility bill.
@@ -853,8 +855,8 @@
                 <input type="button" value="Next" onclick="next_step()" id = "nextButton">
                 <input type="button" value = "Update Cost Table" onclick="update_costs()" id = "updateButton">
             </form>
-        </div>
-        <div id = "right">
+        </div> <!-- End left Div-->
+        <div  class="col-lg-3">
 <!--             <table id = 'cost-table'>
                 Auto generated table goes here
                 <tbody>
@@ -975,6 +977,7 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
+        </div> <!--End Right div-->
+    </div> <!--End Row-->
+    </div><!-- end container-->
 </body>
