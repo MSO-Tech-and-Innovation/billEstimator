@@ -471,14 +471,6 @@
             };
         };  
 
-        var disableSewerVolume = function(bool){
-            var sewerDiv = document.getElementById("sewerVolume");
-            sewerDiv.disabled = bool
-            if (bool === false){
-                sewerDiv.value = 0
-            }
-
-        }
         
 
         var update_costs = function(){
@@ -638,8 +630,8 @@
             var sewerBaseCharge = '';
             //var connectedSewer = document.getElementById("sewerY")
             //var disconnectedSewer = document.getElementById("sewerN")
-            var sewerDiv = document.getElementById("sewerVolume");
-            var sewerVolume = sewerDiv.valueAsNumber;
+            //var sewerDiv = document.getElementById("sewerVolume");
+            var sewerVolume = '';
 /*             if (connectedSewer.checked){
                 disableSewerVolume(false)
                 if (in_city_limits){
@@ -658,11 +650,14 @@
             }
             else{
                 sewer_charge.false
-            }
+            };
             //sewer volume calculation based on WQA
-            if (sewerVolume<WQA){
-                sewerVolume = WQA
+            if (waterUsed<WQA){
+                sewerVolume = waterUsed
             }
+            else {
+                sewerVolume = WQA
+            };
             var sewerVolumeCost = sewerVolume * 0.8730;
             console.log("Sewer Volume Cost: ", sewerVolumeCost)
 
@@ -750,10 +745,10 @@
 
                 *This calculator is for estimate purposes only. Charges may vary on actual bill*
                 
-                To more accurately estimate your bill, select whether your property is inside city limits or outside city limits. 
                 </h4>
                 <br>
                 <h4><strong>For information on where to find each category below on your bill, <a href="https://lawrenceks.org/utility-bill-example-block-rate-calculator/" target="_blank">view an example bill</a></strong></h4>
+                <h4><a href="https://link-infinity.lawrenceks.org/">Log in to the customer portal to view your account information</a></h4>
             <div id = "errors-div"></div>
             <div id = "questionaire">
             <form id = "formDiv">
@@ -805,13 +800,13 @@
                     <input type="radio" name="sewerYN" id="sewerN" value = 'false' onclick="disableSewerVolume(true)">
  -->
                     <h1>Sewer volume charge</h1>
-                    <h4>If a customer’s water usage is less than their WQA the customer's sewer volume is used instead of actual water usage.</h4>
+                    <h4>If a customer’s water usage is less than their WQA the customer's water usage is used instead of their WQA.</h4>
                     <br>
                     <label for="WQA">Please enter your WQA (Winter Quarter Average): </label>
                     <input name="WQA" type="number" id = "WQA">
                     <br>
-                    <label for="sewerVolume">Sewer volume amount</label>
-                    <input type="number" name="sewerVolume" id = 'sewerVolume'>
+                    <!-- <label for="sewerVolume">Sewer volume amount</label>
+                    <input type="number" name="sewerVolume" id = 'sewerVolume'> -->
                 </div>
                 <div id="question_4" class="question">
                     <h1>Storm Water Base Charge</h1>
