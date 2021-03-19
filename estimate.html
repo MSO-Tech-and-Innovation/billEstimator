@@ -636,11 +636,11 @@
             var stateFee = waterUsed * 0.0032;
             //sewer base calculation
             var sewerBaseCharge = '';
-            var connectedSewer = document.getElementById("sewerY")
-            var disconnectedSewer = document.getElementById("sewerN")
+            //var connectedSewer = document.getElementById("sewerY")
+            //var disconnectedSewer = document.getElementById("sewerN")
             var sewerDiv = document.getElementById("sewerVolume");
             var sewerVolume = sewerDiv.valueAsNumber;
-            if (connectedSewer.checked){
+/*             if (connectedSewer.checked){
                 disableSewerVolume(false)
                 if (in_city_limits){
                 sewerBaseCharge = sewer_charge.true
@@ -652,8 +652,13 @@
             if(disconnectedSewer.checked){
                 sewerBaseCharge = 0
                 sewerVolume = 0
+            } */
+            if (in_city_limits){
+                sewerBaseCharge = sewer_charge.true
             }
-
+            else{
+                sewer_charge.false
+            }
             //sewer volume calculation based on WQA
             if (sewerVolume<WQA){
                 sewerVolume = WQA
@@ -693,7 +698,15 @@
             var solidWaste = document.getElementById("solidWaste");
             var totalSolidWaste = solidWasteFee + moreCarts;
             solidWaste.textContent = formatDollar.format(totalSolidWaste);
-            //total cost
+            //total cost and subtotals
+            var waterSubDiv = document.getElementById("waterSub");
+            waterSubDiv.textContent = formatDollar.format(meterCharge+stateFee+totalWaterVolume);
+            var sewerSubDiv = document.getElementById("sewerSub");
+            sewerSubDiv.textContent = formatDollar.format(sewerBaseCharge+sewerVolumeCost);
+            var stormSubDiv = document.getElementById("stormSub");
+            stormSubDiv.textContent = formatDollar.format(stormBaseCharge);
+            var solidwasteSubDiv = document.getElementById("solidwasteSub");
+            solidwasteSubDiv.textContent = formatDollar.format(totalSolidWaste);
             var totalDiv = document.getElementById('total')
             var runningTotal = meterCharge + totalWaterVolume + sewerBaseCharge + sewerVolumeCost + stormBaseCharge + totalSolidWaste + stateFee
             totalDiv.innerHTML = formatDollar.format(runningTotal)
@@ -780,22 +793,23 @@
                 <div id="question_2" class="question">
                 <h1>Water/IRR - Volume Charge</h1>
                     <h4>Please enter the amount of water used: </h4>
-                    <label for="volume">Please enter your water usage amount: </label>
+                    <label for="volume">Please enter your water usage amount in hundred gallons (as shown on your bill):   </label>
                     <input name="volume" type="number" id = "waterUsed">
                 </div>
                 <div id="question_3" class="question">
-                    <h1>Sewer base charge</h1>
+<!--                     <h1>Sewer base charge</h1>
                     <h4>Is your septic system connected to the city's sewer line?</h4>
                     <label for="sewerY">Yes</label>
                     <input id="sewerY" name = "sewerYN" type="radio" value='true' onclick="disableSewerVolume(false)">
                     <label for="sewerN">No</label>
                     <input type="radio" name="sewerYN" id="sewerN" value = 'false' onclick="disableSewerVolume(true)">
+ -->
+                    <h1>Sewer volume charge</h1>
+                    <h4>If a customer’s water usage is less than their WQA the customer's sewer volume is used instead of actual water usage.</h4>
                     <br>
                     <label for="WQA">Please enter your WQA (Winter Quarter Average): </label>
                     <input name="WQA" type="number" id = "WQA">
                     <br>
-                    <h1>Sewer volume charge</h1>
-                    <h4>If a customer’s water usage is less than their WQA the customer's sewer volume is used instead of actual water usage.</h4>
                     <label for="sewerVolume">Sewer volume amount</label>
                     <input type="number" name="sewerVolume" id = 'sewerVolume'>
                 </div>
@@ -910,6 +924,7 @@
                             <p class="s2">Water/IRR - Monthly Base Charge<span id="meterCharge" class="s2"></span></p>
                             <!-- <p class="s2">Water/IRR - Volume Charge <span id ="waterVolume"class="s2"></span></p> -->
                             <p class="s2">State Wate Plan Fee <span id ="stateFee"class="s2"></span></p>
+                            <p class="s4">Water Charges: <span id="waterSub"></span></p>
                         </td>
                         <td>
                             
@@ -926,6 +941,7 @@
                         <td class="borderBox">
                             <p class="s2">Sewer - Base Charge<span class="s2" id="sewerBase"></span></p>
                             <p class="s2">Sewer - Volume Charge<span class="s2" id="sewerVolumeCharge"></span></p>
+                            <p class="s4">Sewer Charges: <span id="sewerSub"></span></p>
                         </td>
                     </tr>
                     <tr>
@@ -936,6 +952,8 @@
                     <tr>
                         <td class="borderBox">
                             <p class="s2">Storm Water - Base Charge<span class="s2" id="stormBase"></span></p>
+                            <p class="s4">Storm Charges: <span id="stormSub"></span></p>
+
                         </td>
                     </tr>
                     <tr>
@@ -946,6 +964,7 @@
                     <tr>
                         <td class="borderBox">
                             <p class="s2">Solid Waste - Cart<span class="s2" id="solidWaste"></span></p>
+                            <p class="s4">Solid Waste Charges: <span id="solidwasteSub"></span></p>
                             
                         </td>
                     </tr>
@@ -956,7 +975,7 @@
                     </tr>
                     <tr>
                         <td class="borderBox">
-                            <p class="s2">Total<span class="s2" id="total"></span></p>  
+                            <p class="s4">Total<span class="s2" id="total"></span></p>  
                         </td>
                     </tr>
                 </tbody>
