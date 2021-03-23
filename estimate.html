@@ -4,7 +4,10 @@
     <title>Utilities Calculator</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" id="x-child-css" href="https://cdn.lawrenceks.org/wp-content/themes/pro-child/style.css?ver=2.5.5" type="text/css" media="all">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.classList"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
 
         body {
@@ -752,8 +755,10 @@
     </script>
 </head>
 <body>
-    <div id = "content">
-        <div id = "left">
+    <div class="container">
+    <div id = "container-fluid">
+    <div class="row">
+        <div  class = "col-lg-9">
             <h1>Utilities fee estimator</h1>
             <br>
             <h4>This calculator is set up for residential customers. Bills for customers in apartments or multi-family dwellings and commercial customers vary by situation. If you live in an apartment or multi-family dwelling, or you are a residential customer, please call the Utility Billing office for more information about your utility bill.
@@ -771,21 +776,21 @@
                     <p>
                     Is your property inside or outside Lawrence City Limits? 
                     </p>
-                    <input type = "radio" name = "prequestion" id = "Inside" value = 'true'>
-                    <label for="Inside">Inside</label><br>
-                    <input type = "radio" name="prequestion" id = "Outside" value = 'false'>
-                    <label for = "Outside">Outside</label>
+                    <input type = "radio" name = "prequestion" id = "Inside" value = 'true' class="form-check-input">
+                    <label for="Inside" class="form-check-label">Inside</label><br>
+                    <input type = "radio" name="prequestion" id = "Outside" value = 'false' class="form-check-input">
+                    <label for = "Outside" class="form-check-label">Outside</label>
                     <br>  
                 </div>
             </form>
             </div>
             <!--Start of the actual questions-->
-            <form action="#" method="post" onsubmit="return false;" id="row-form" class="row-form" style = "display : none;">
+            <form action="#" method="post" onsubmit="return false;" id="row-form" class="row-form" style = "display : none;" class="input-group mb-3">
                 <h1>Water/ IRR Monthly Base Charge</h1>
                 <div id = "question_1">
                     <h4>What is the size of your meter?</h4>
                     <label for="size">Choose a size: </label>
-                    <select name="size" id="waterMeter" onclick="select_size()">
+                    <select name="size" id="waterMeter" onclick="select_size()" class="form-select">
                         <option value="0">5/8 and 3/4 Inch</option>
                         <option value="1">1 Inch</option>
                         <option value="2">1 1/2 Inch</option>
@@ -804,7 +809,7 @@
                 <h1>Water/IRR - Volume Charge</h1>
                     <h4>Please enter the amount of water used: </h4>
                     <label for="volume">Please enter your water usage amount in hundred gallons (as shown on your bill):   </label>
-                    <input name="volume" type="number" id = "waterUsed">
+                    <input name="volume" type="number" id = "waterUsed" class = "form-control">
                 </div>
                 <div id="question_3" class="question">
 <!--                     <h1>Sewer base charge</h1>
@@ -818,7 +823,7 @@
                     <h4>If a customer’s water usage is less than their WQA the customer's water usage is used instead of their WQA.</h4>
                     <br>
                     <label for="WQA">Please enter your WQA (Winter Quarter Average): </label>
-                    <input name="WQA" type="number" id = "WQA">
+                    <input name="WQA" type="number" id = "WQA" class = "form-control">
                     <br>
                     <!-- <label for="sewerVolume">Sewer volume amount</label>
                     <input type="number" name="sewerVolume" id = 'sewerVolume'> -->
@@ -827,7 +832,7 @@
                     <h1>Storm Water Base Charge</h1>
                     <h4>What is your location's ERU?</h4>
                     <label for="eru">ERU rating: </label>
-                    <select name="eru" id="eru">
+                    <select name="eru" id="eru" class="form-select">
                         <option value=".37">0.37</option>
                         <option value=".66">0.66</option>
                         <option value=".67">0.67</option>
@@ -849,7 +854,7 @@
                     <h1>Solid Waste Charge</h1>
                     <h4>Please enter level of trash service</h4>
                     <label for="mainCart"></label>
-                    <select name="mainCart" id="mainCart">
+                    <select name="mainCart" id="mainCart" class="form-select">
                         <option value="0">35 Gallon cart</option>
                         <option value="1">65 Gallon cart</option>
                         <option value="2">95 Gallon cart</option>
@@ -860,16 +865,17 @@
                     <input type="number" name="thirtyFive" id="thirtyFive" placeholder="0">
                     <br> -->
                     <label for="sixtyFive">Additional 65 Gallon Carts</label>
-                    <input type="number" name="sixtyFive" id="sixtyFive" placeholder="0">
+                    <input type="number" name="sixtyFive" id="sixtyFive" placeholder="0" class="form-control">
                     <br>
                     <label for="nintyFive">Additional 95 Gallon Carts</label>
-                    <input type="number" name="nintyFive" id="nintyFive" placeholder="0">
+                    <input type="number" name="nintyFive" id="nintyFive" placeholder="0" class="form-control">
                 </div>
-                <input type="button" value="Next" onclick="next_step()" id = "nextButton">
-                <input type="button" value = "Update Cost Table" onclick="update_costs()" id = "updateButton">
+                <br>
+                <input type="button" value="Next" onclick="next_step()" id = "nextButton" class="btn btn-primary">
+                <input type="button" value = "Update Cost Table" onclick="update_costs()" id = "updateButton" class="btn btn-primary">
             </form>
-        </div>
-        <div id = "right">
+        </div> <!-- End left Div-->
+        <div  class="col-lg-3">
 <!--             <table id = 'cost-table'>
                 Auto generated table goes here
                 <tbody>
@@ -990,6 +996,8 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
+        </div> <!--End Right div-->
+    </div> <!--End Row-->
+    </div><!-- end container-->
+</div>
 </body>
