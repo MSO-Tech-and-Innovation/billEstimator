@@ -565,89 +565,15 @@
             getblock1(WQA, minAveWin, waterUsed);
             getblock2();
             getblock3();
-            /* 
-            
-            //first attempt
-            if(WQA >minAveWin){
-                //block1
-                //and the amount used is greater than 1.25 times your WQA
-                if(waterUsed >WQA*1.25){
-                    //Then your block1 rate is 1.25 times your water used
-                    block1 = waterUsed * 1.25
-                }
-                if(waterUsed > minAveWin*1.25){
-                    block1 = minAveWin*1.25
-                }
-                else{
-                    block1 = waterUsed
-                }
-                //block 2
-                if(waterUsed > WQA *2){
-                    block2 = (WQA *2) - (WQA *1.25);
-                    if(waterUsed > WQA*1.25){
-                        block2 = waterUsed - (WQA*1.25)
-                    }
-                    else{
-                        block2 = 0
-                    }
-                }
-                if(waterUsed > (minAveWin*2)){
-                    block2 = (minAveWin*2) - (minAveWin*1.25)
-                }
-                if(waterUsed >minAveWin*1.25){
-                    block2 = waterUsed - (minAveWin*1.25)
-                }
-                else{
-                    block2 = 0
-                }
-            }
-            
-        
-            //block 3
-            if (WQA > minAveWin){
-                if(waterUsed > (WQA*2)){
-                    block3 = (waterUsed - (WQA*2))
-                }
-                else{
-                    block3 = 0
-                }
-                if(waterUsed > (minAveWin*2)){
-                    //last arguement of the excel spreadsheet
-                    block3 = (waterUsed - (minAveWin*2))
-                }
-            }
-            else{
-                if(waterUsed < minAveWin){
-                    block1=minAveWin
-                }
-            } */
 
-            //var totalWaterVolume = (waterUsed * irrPrice) + (waterUsed * stateWaterPlan);
             var subtotal1 = ((block1/10) * price1)
             var subtotal2 = ((block2/10) * price2)
             var subtotal3 = ((block3/10) * price3)
             var totalWaterVolume = subtotal1 + subtotal2 + subtotal3
-            console.log("Block1:",block1,"Block 2:", block2,"Block 3:", block3)
             var stateFee = waterUsed * 0.0032;
             //sewer base calculation
             var sewerBaseCharge = '';
-            //var connectedSewer = document.getElementById("sewerY")
-            //var disconnectedSewer = document.getElementById("sewerN")
-            //var sewerDiv = document.getElementById("sewerVolume");
             var sewerVolume = '';
-/*             if (connectedSewer.checked){
-                disableSewerVolume(false)
-                if (in_city_limits){
-                sewerBaseCharge = sewer_charge.true
-                }
-                else{
-                    sewerBaseCharge = sewer_charge.false
-                }
-            }
-            if(disconnectedSewer.checked){
-                sewerBaseCharge = 0
-                sewerVolume = 0
-            } */
             var getSewerBase = function(){
                 if (in_city_limits){
                 sewerBaseCharge = sewer_charge.true
@@ -659,25 +585,18 @@
 
             //sewer volume calculation based on WQA
             var getSewerVol = function(){
-                console.log("water used "+waterUsed)
-                console.log("WQA"+WQA)
                 waterUsed = Number(waterUsed);
                 WQA = Number(WQA);
                 if (waterUsed<WQA){
                     sewerVolume = waterUsed;
-                    console.log(sewerVolume);
-                    console.log("Less than WQA");
                 }
                 else if (waterUsed>=WQA) {
                     sewerVolume = WQA
-                    console.log(sewerVolume)
-                    console.log("More than WQA")
                 };
             };
             getSewerBase();
             getSewerVol();
             var sewerVolumeCost = sewerVolume * 0.8730;
-            console.log("Sewer Volume Cost: ", sewerVolumeCost)
 
             //Storm Water Base
             var stormBaseCharge = current_storm_water_base[eru_index].charge;
@@ -692,8 +611,6 @@
             //Create and display table
             var meterChargeDiv = document.getElementById('meterCharge')
             meterChargeDiv.textContent = formatDollar.format(meterCharge);
-            //var waterVolume = document.getElementById("waterVolume");
-            //waterVolume.textContent = formatDollar.format(totalWaterVolume);
             var stateFeeDiv = document.getElementById("stateFee");
             stateFeeDiv.textContent = formatDollar.format(stateFee);
             var block1Div = document.getElementById("block1");
@@ -812,21 +729,13 @@
                     <input name="volume" type="number" id = "waterUsed" class = "form-control">
                 </div>
                 <div id="question_3" class="question">
-<!--                     <h1>Sewer base charge</h1>
-                    <h4>Is your septic system connected to the city's sewer line?</h4>
-                    <label for="sewerY">Yes</label>
-                    <input id="sewerY" name = "sewerYN" type="radio" value='true' onclick="disableSewerVolume(false)">
-                    <label for="sewerN">No</label>
-                    <input type="radio" name="sewerYN" id="sewerN" value = 'false' onclick="disableSewerVolume(true)">
- -->
+
                     <h1>Sewer volume charge</h1>
                     <h4>If a customer’s water usage is less than their WQA the customer's water usage is used instead of their WQA.</h4>
                     <br>
                     <label for="WQA">Please enter your WQA (Winter Quarter Average): </label>
                     <input name="WQA" type="number" id = "WQA" class = "form-control">
                     <br>
-                    <!-- <label for="sewerVolume">Sewer volume amount</label>
-                    <input type="number" name="sewerVolume" id = 'sewerVolume'> -->
                 </div>
                 <div id="question_4" class="question">
                     <h1>Storm Water Base Charge</h1>
@@ -841,14 +750,6 @@
                         <option value="1.8">1.80</option>
                         <option value="2.5">2.50</option>
                     </select>
-                    <!-- <div id="eru_chart" onclick = "update_eru_chart()">
-                        <label for="currentYearTrue">Display Chart for 2021 Prices: </label>
-                        <input type="radio" name = 'year' value = 'true' id="currentYearTrue" checked = "checked">
-                        <label for="currentYearFalse">Display chart for 2020 prices: </label>
-                        <input type="radio" name="year" value="false" id="currentYearFalse">
-                        <table id = "eruTable">
-                        </table>
-                    </div> -->
                 </div>
                 <div id="question_5" class="question">
                     <h1>Solid Waste Charge</h1>
@@ -858,12 +759,9 @@
                         <option value="0">35 Gallon cart</option>
                         <option value="1">65 Gallon cart</option>
                         <option value="2">95 Gallon cart</option>
-                        <!-- <option value="3">Low Income Rate</option> -->
                     </select>
                     <h4>Please enter the number of additional carts you have: </h4>
-                    <!-- <label for="thirtyFive">Additional 35 Gallon Carts</label>
-                    <input type="number" name="thirtyFive" id="thirtyFive" placeholder="0">
-                    <br> -->
+
                     <label for="sixtyFive">Additional 65 Gallon Carts</label>
                     <input type="number" name="sixtyFive" id="sixtyFive" placeholder="0" class="form-control">
                     <br>
@@ -876,50 +774,7 @@
             </form>
         </div> <!-- End left Div-->
         <div  class="col-lg-3">
-<!--             <table id = 'cost-table'>
-                Auto generated table goes here
-                <tbody>
-                    <tr>
-                        <th>Line Item</th>
-                        <th>Estimated Price</th>
-                    </tr> 
-                   <tr>
-                        <td>Water Base Charge</td>
-                        <td id = "meterCharge"></td> 
-                    </tr>
-                    <tr>
-                        <td>Water Volume</td>
-                        <td>
-                            <ul>
-                                <li id ="block1"></li>
-                                <li id ="block2"></li>
-                                <li id ="block3"></li>
-                                <li id ="waterVolume"></li>
-                            </ul>
-                        </td>
-                    </tr> -->
-<!--                     <tr>
-                        <td>Sewer Base Charge</td>
-                        <td id = "sewerBase"></td>
-                    </tr>
-                    <tr>
-                        <td>Sewer Volume Charge</td>
-                        <td id = "sewerVolumeCharge"></td>
-                    </tr>
-                    <tr>
-                        <td>Storm Water Charge</td>
-                        <td id = "stormBase"></td>
-                    </tr>
-                    <tr>
-                        <td>Solid Waste</td>
-                        <td id = "solidWaste"></td>
-                    </tr>
-                    <tr>
-                        <td>Total</td>
-                        <td id = "total"></td>
-                    </tr>
-                </tbody>
-            </table> -->
+
             <table id = "billTable">
                 <tbody class="TotalAmounts">
                     <tr>
