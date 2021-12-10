@@ -376,8 +376,17 @@
             {"true":4.40, "false":4.80},
         ];
         //monthly sewer service charge
-        var sewer_charge = {"true": 14.85, "false": 16.30};
-        var current_storm_water_base = [
+        var sewer_charge = {"true": 15.60, "false": 17.20};
+        var current_storm_water_base = [//2022 prices
+            {'ERU':.37, 'charge':2.61},
+            {'ERU':.66, 'charge':4.66},
+            {'ERU':.67, 'charge':4.73},
+            {'ERU':1, 'charge':7.06},
+            {'ERU':1.25, 'charge':8.83},
+            {'ERU':1.8, 'charge':12.71},
+            {'ERU':2.5, 'charge':17.65},
+        ]
+        var last_year_storm_water_base = [//2021 prices
             {'ERU':.37, 'charge':2.50},
             {'ERU':.66, 'charge':4.46},
             {'ERU':.67, 'charge':4.52},
@@ -385,15 +394,6 @@
             {'ERU':1.25, 'charge':8.44},
             {'ERU':1.8, 'charge':12.15},
             {'ERU':2.5, 'charge':16.88},
-        ]
-        var last_year_storm_water_base = [
-            {'ERU':.37, 'charge':1.67},
-            {'ERU':.66, 'charge':2.97},
-            {'ERU':.67, 'charge':3.02},
-            {'ERU':1, 'charge':4.50},
-            {'ERU':1.25, 'charge':5.63},
-            {'ERU':1.8, 'charge':8.10},
-            {'ERU':2.5, 'charge':11.25},
         ]
         var formatDollar = new Intl.NumberFormat('en-US', {
             style: 'currency',
@@ -458,9 +458,9 @@
         //Solid Waste rates
 
         var in_city_limits = true;
-        var trash_cart = [17.82, 19.36, 21.42, 6.78];
-        var additional65 = 3.86;
-        var additional95 = 4.89;
+        var trash_cart = [18.35, 19.94, 22.06, 6.98];
+        var additional65 = 3.98;
+        var additional95 = 5.04;
 
         var reveal = function(){
             var inside = document.getElementById('Inside');
