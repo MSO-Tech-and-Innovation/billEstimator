@@ -352,32 +352,41 @@
         var minAveWin = 30;
         //block 1 volume and price
         var block1 = 0
-        var price1 = 7.64
+        var price1 = 8.20
         //block 2 volume and price
         var block2 = 0
-        var price2 = 8.41
+        var price2 = 9.02
         //block 3 volume and price
         var block3 = 0
-        var price3 = 8.79
+        var price3 = 9.43
         //var meter_selection = document.getElementById("meter_size");
         //true  = Inside city limits, false = outside
         var price_list = [
-            {"true":4.65, "false":5.10},
-            {"true":5.55, "false":6.10},
-            {"true":6.40, "false":7.00},
-            {"true":8.80, "false":9.65},
-            {"true":26.25, "false":28.90},
-            {"true":32.70, "false":35.95},
-            {"true":48.55, "false":53.40},
-            {"true":65.25, "false":71.75},
-            {"true":85.60, "false":94.15},
-            {"true":99.60, "false":109.60},
-            {"true":132.85, "false":146.15},
-            {"true":4.65, "false":5.10},
+            {"true":4.90, "false":5.40},
+            {"true":5.85, "false":6.45},
+            {"true":6.75, "false":7.40},
+            {"true":9.25, "false":10.20},
+            {"true":27.60, "false":30.35},
+            {"true":34.35, "false":37.80},
+            {"true":51.00, "false":56.10},
+            {"true":68.55, "false":75.40},
+            {"true":89.90, "false":98.90},
+            {"true":104.60, "false":115.05},
+            {"true":139.50, "false":153.45},
+            {"true":4.90, "false":5.40},
         ];
         //monthly sewer service charge
-        var sewer_charge = {"true": 15.60, "false": 17.20};
-        var current_storm_water_base = [//2022 prices
+        var sewer_charge = {"true": 16.40, "false": 18.05};
+        var current_storm_water_base = [//2023 prices
+            {'ERU':.37, 'charge':2.73},
+            {'ERU':.66, 'charge':4.87},
+            {'ERU':.67, 'charge':4.94},
+            {'ERU':1, 'charge':7.38},
+            {'ERU':1.25, 'charge':9.23},
+            {'ERU':1.8, 'charge':13.28},
+            {'ERU':2.5, 'charge':18.45},
+        ]
+        var last_year_storm_water_base = [//2022 prices
             {'ERU':.37, 'charge':2.61},
             {'ERU':.66, 'charge':4.66},
             {'ERU':.67, 'charge':4.73},
@@ -385,15 +394,6 @@
             {'ERU':1.25, 'charge':8.83},
             {'ERU':1.8, 'charge':12.71},
             {'ERU':2.5, 'charge':17.65},
-        ]
-        var last_year_storm_water_base = [//2021 prices
-            {'ERU':.37, 'charge':2.50},
-            {'ERU':.66, 'charge':4.46},
-            {'ERU':.67, 'charge':4.52},
-            {'ERU':1, 'charge':6.75},
-            {'ERU':1.25, 'charge':8.44},
-            {'ERU':1.8, 'charge':12.15},
-            {'ERU':2.5, 'charge':16.88},
         ]
         var formatDollar = new Intl.NumberFormat('en-US', {
             style: 'currency',
@@ -458,9 +458,9 @@
         //Solid Waste rates
 
         var in_city_limits = true;
-        var trash_cart = [18.35, 19.94, 22.06, 6.98];
-        var additional65 = 3.98;
-        var additional95 = 5.04;
+        var trash_cart = [18.90, 20.54, 22.72, 7.91];
+        var additional65 = 4.10;
+        var additional95 = 5.19;
 
         var reveal = function(){
             var inside = document.getElementById('Inside');
