@@ -596,7 +596,8 @@
             };
             getSewerBase();
             getSewerVol();
-            var sewerVolumeCost = sewerVolume * 0.9280;
+            //Sewer volume charge is $10 per 1000 gallons
+            var sewerVolumeCost = sewerVolume * 1;
 
             //Storm Water Base
             var stormBaseCharge = current_storm_water_base[eru_index].charge;
