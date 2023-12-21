@@ -1,60 +1,60 @@
         var current_step = 1;
-        var irrPrice = 0.735;
+        //var irrPrice = 0.735;
         var stateWaterPlan = 0.0032;
         //Minimum average winter consumption
         var minAveWin = 30;
         //block 1 volume and price
         var block1 = 0
-        var price1 = 8.20
+        var price1 = 9.17
         //block 2 volume and price
         var block2 = 0
-        var price2 = 9.02
+        var price2 = 10.09
         //block 3 volume and price
         var block3 = 0
-        var price3 = 9.43
-        //var meter_selection = document.getElementById("meter_size");
-        //true  = Inside city limits, false = outside
+        var price3 = 10.55
+
+        //Water monthly service charge eff 1/1/2024 (ord #9929)
         var price_list = [
-            {"true":4.90, "false":5.40},
-            {"true":5.85, "false":6.45},
-            {"true":6.75, "false":7.40},
-            {"true":9.25, "false":10.20},
-            {"true":27.60, "false":30.35},
-            {"true":34.35, "false":37.80},
-            {"true":51.00, "false":56.10},
-            {"true":68.55, "false":75.40},
-            {"true":89.90, "false":98.90},
-            {"true":104.60, "false":115.05},
-            {"true":139.50, "false":153.45},
-            {"true":4.90, "false":5.40},
+            {"true":5.15, "false":5.70},
+            {"true":6.15, "false":6.80},
+            {"true":7.10, "false":7.80},
+            {"true":9.75, "false":10.70},
+            {"true":29.00, "false":31.90},
+            {"true":36.10, "false":39.70},
+            {"true":53.55, "false":58.95},
+            {"true":72.00, "false":79.20},
+            {"true":94.40, "false":103.85},
+            {"true":109.85, "false":120.85},
+            {"true":146.50, "false":161.15},
+            {"true":5.15, "false":5.70},
         ];
         //monthly sewer service charge
-        var sewer_charge = {"true": 16.40, "false": 18.05};
-        var current_storm_water_base = [//2023 prices
-            {'ERU':.37, 'charge':2.73},
-            {'ERU':.66, 'charge':4.87},
-            {'ERU':.67, 'charge':4.94},
-            {'ERU':1, 'charge':7.38},
-            {'ERU':1.25, 'charge':9.23},
-            {'ERU':1.8, 'charge':13.28},
-            {'ERU':2.5, 'charge':18.45},
+        var sewer_charge = {"true": 17.25, "false": 18.95};
+        var current_storm_water_base = [//2024 prices
+            {'ERU':.37, 'charge':2.94},
+            {'ERU':.66, 'charge':5.24},
+            {'ERU':.67, 'charge':5.32},
+            {'ERU':1, 'charge':7.94},
+            {'ERU':1.25, 'charge':9.93},
+            {'ERU':1.8, 'charge':14.29},
+            {'ERU':2.5, 'charge':19.85},
         ]
-        var last_year_storm_water_base = [//2022 prices
-            {'ERU':.37, 'charge':2.61},
-            {'ERU':.66, 'charge':4.66},
-            {'ERU':.67, 'charge':4.73},
-            {'ERU':1, 'charge':7.06},
-            {'ERU':1.25, 'charge':8.83},
-            {'ERU':1.8, 'charge':12.71},
-            {'ERU':2.5, 'charge':17.65},
-        ]
+        var last_year_storm_water_base = [//2023 prices
+        {'ERU':.37, 'charge':2.73},
+        {'ERU':.66, 'charge':4.87},
+        {'ERU':.67, 'charge':4.94},
+        {'ERU':1, 'charge':7.38},
+        {'ERU':1.25, 'charge':9.23},
+        {'ERU':1.8, 'charge':13.28},
+        {'ERU':2.5, 'charge':18.45},
+    ]
         var formatDollar = new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
             minimumFractionDigits: 2
         });
         var eru_table = function(current_year){
-            //var tableBody = document.getElementById('eru_prices');
+
             var table_div = document.getElementById('eruTable');
             try {
                 table_div.innerHTML = ""
@@ -111,9 +111,9 @@
         //Solid Waste rates
 
         var in_city_limits = true;
-        var trash_cart = [18.90, 20.54, 22.72, 7.91];
-        var additional65 = 4.10;
-        var additional95 = 5.19;
+        var trash_cart = [20.13, 21.88, 24.20, 7.66]; //respective sizes are 35G, 65G, 95G, low income rate
+        var additional65 = 4.37;
+        var additional95 = 5.53;
 
         var reveal = function(){
             var inside = document.getElementById('Inside');
@@ -223,7 +223,7 @@
             var subtotal2 = ((block2/10) * price2)
             var subtotal3 = ((block3/10) * price3)
             var totalWaterVolume = subtotal1 + subtotal2 + subtotal3
-            var stateFee = waterUsed * 0.0032;
+            var stateFee = waterUsed * stateWaterPlan;
             //sewer base calculation
             var sewerBaseCharge = '';
             var sewerVolume = '';
