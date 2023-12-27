@@ -30,6 +30,7 @@
         ];
         //monthly sewer service charge
         var sewer_charge = {"true": 17.25, "false": 18.95};
+        var sewer_volume = {"true": 11.02, "false": 14.33}
         var current_storm_water_base = [//2024 prices
             {'ERU':.37, 'charge':2.94},
             {'ERU':.66, 'charge':5.24},
@@ -232,7 +233,7 @@
                 sewerBaseCharge = sewer_charge.true
                 }
                 else{
-                    sewer_charge.false
+                    sewerBaseCharge = sewer_charge.false
                 };
             };
 
@@ -250,7 +251,14 @@
             getSewerBase();
             getSewerVol();
             //Sewer volume charge is $10 per 1000 gallons
-            var sewerVolumeCost = sewerVolume * 1;
+            var sewer_volume_charge = 0
+            if (in_city_limits){
+                sewer_volume_charge = sewer_volume.true
+                }
+                else{
+                    sewer_volume_charge = sewer_volume.false
+                };
+            var sewerVolumeCost = sewerVolume * sewer_volume_charge;
 
             //Storm Water Base
             var stormBaseCharge = current_storm_water_base[eru_index].charge;
