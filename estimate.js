@@ -5,33 +5,42 @@
         var minAveWin = 30;
         //block 1 volume and price
         var block1 = 0
-        var price1 = 9.17
+        var price1 = 10.27
         //block 2 volume and price
         var block2 = 0
-        var price2 = 10.09
+        var price2 = 11.30
         //block 3 volume and price
         var block3 = 0
-        var price3 = 10.55
+        var price3 = 11.82
 
-        //Water monthly service charge eff 1/1/2024 (ord #9929)
+        //Water monthly service charge eff 1/1/2025
         var price_list = [
-            {"true":5.15, "false":5.70},
-            {"true":6.15, "false":6.80},
-            {"true":7.10, "false":7.80},
-            {"true":9.75, "false":10.70},
-            {"true":29.00, "false":31.90},
-            {"true":36.10, "false":39.70},
-            {"true":53.55, "false":58.95},
-            {"true":72.00, "false":79.20},
-            {"true":94.40, "false":103.85},
-            {"true":109.85, "false":120.85},
-            {"true":146.50, "false":161.15},
-            {"true":5.15, "false":5.70},
+            {"true":5.45, "false":5.95},
+            {"true":6.50, "false":7.15},
+            {"true":7.50, "false":8.25},
+            {"true":10.25, "false":11.30},
+            {"true":30.45, "false":33.50},
+            {"true":37.95, "false":41.70},
+            {"true":56.25, "false":61.90},
+            {"true":75.60, "false":83.20},
+            {"true":99.15, "false":109.05},
+            {"true":115.35, "false":126.90},
+            {"true":153.85, "false":169.35},
+            {"true":5.45, "false":5.95},
         ];
-        //monthly sewer service charge
-        var sewer_charge = {"true": 17.25, "false": 18.95};
-        var sewer_volume = {"true": 11.02, "false": 14.33}
-        var current_storm_water_base = [//2024 prices
+        //monthly sewer charges
+        var sewer_charge = {"true": 18.15, "false": 19.95};
+        var sewer_volume = {"true": 12.22, "false": 15.89};
+        var current_storm_water_base = [//2025 prices
+            {'ERU':.37, 'charge':3.16},
+            {'ERU':.66, 'charge':5.64},
+            {'ERU':.67, 'charge':5.72},
+            {'ERU':1, 'charge':8.54},
+            {'ERU':1.25, 'charge':10.68},
+            {'ERU':1.8, 'charge':15.37},
+            {'ERU':2.5, 'charge':21.35},
+        ]
+        var last_year_storm_water_base = [//2024 prices
             {'ERU':.37, 'charge':2.94},
             {'ERU':.66, 'charge':5.24},
             {'ERU':.67, 'charge':5.32},
@@ -40,15 +49,6 @@
             {'ERU':1.8, 'charge':14.29},
             {'ERU':2.5, 'charge':19.85},
         ]
-        var last_year_storm_water_base = [//2023 prices
-        {'ERU':.37, 'charge':2.73},
-        {'ERU':.66, 'charge':4.87},
-        {'ERU':.67, 'charge':4.94},
-        {'ERU':1, 'charge':7.38},
-        {'ERU':1.25, 'charge':9.23},
-        {'ERU':1.8, 'charge':13.28},
-        {'ERU':2.5, 'charge':18.45},
-    ]
         var formatDollar = new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
@@ -112,9 +112,9 @@
         //Solid Waste rates
 
         var in_city_limits = true;
-        var trash_cart = [20.13, 21.88, 24.20, 7.66]; //respective sizes are 35G, 65G, 95G, low income rate
-        var additional65 = 4.37;
-        var additional95 = 5.53;
+        var trash_cart = [20.94, 22.76, 25.17, 7.97]; //respective sizes are 35G, 65G, 95G, low income rate
+        var additional65 = 4.54;
+        var additional95 = 5.75;
 
         var reveal = function(){
             var inside = document.getElementById('Inside');
@@ -250,7 +250,7 @@
             };
             getSewerBase();
             getSewerVol();
-            //Sewer volume charge is $10 per 1000 gallons
+            //Sewer volume charge is $12.22 per 1000 gallons
             var sewer_volume_charge = 0
             if (in_city_limits){
                 sewer_volume_charge = sewer_volume.true
@@ -258,7 +258,7 @@
                 else{
                     sewer_volume_charge = sewer_volume.false
                 };
-            var sewerVolumeCost = sewerVolume * sewer_volume_charge;
+            var sewerVolumeCost = sewerVolume * (sewer_volume_charge/10);
 
             //Storm Water Base
             var stormBaseCharge = current_storm_water_base[eru_index].charge;
