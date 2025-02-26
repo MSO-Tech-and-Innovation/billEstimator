@@ -3,6 +3,7 @@
         var stateWaterPlan = 0.0032;
         //Minimum average winter consumption
         var minAveWin = 30;
+        //Change #1: block pricing
         //block 1 volume and price
         var block1 = 0
         var price1 = 10.27
@@ -12,7 +13,7 @@
         //block 3 volume and price
         var block3 = 0
         var price3 = 11.82
-
+        //Change #2: water service charge - (meter size)
         //Water monthly service charge eff 1/1/2025
         var price_list = [
             {"true":5.45, "false":5.95},
@@ -28,9 +29,10 @@
             {"true":153.85, "false":169.35},
             {"true":5.45, "false":5.95},
         ];
-        //monthly sewer charges
+        //Change #3: Sewer charges
         var sewer_charge = {"true": 18.15, "false": 19.95};
         var sewer_volume = {"true": 12.22, "false": 15.89};
+        //Change #5: Storm Water charges
         var current_storm_water_base = [//2025 prices
             {'ERU':.37, 'charge':3.16},
             {'ERU':.66, 'charge':5.64},
@@ -109,7 +111,7 @@
                 }
             }
         };
-        //Solid Waste rates
+        //Change #4: Solid Waste charges
 
         var in_city_limits = true;
         var trash_cart = [20.94, 22.76, 25.17, 7.97]; //respective sizes are 35G, 65G, 95G, low income rate
