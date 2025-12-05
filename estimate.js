@@ -6,34 +6,41 @@
         //Change #1: block pricing
         //block 1 volume and price
         var block1 = 0
-        var price1 = 10.27
+        var price1 = 11.18
         //block 2 volume and price
         var block2 = 0
-        var price2 = 11.30
+        var price2 = 12.30
         //block 3 volume and price
         var block3 = 0
-        var price3 = 11.82
+        var price3 = 12.86
         //Change #2: water service charge - (meter size)
-        //Water monthly service charge eff 1/1/2025
+        //Water monthly service charge eff 1/1/2026
         var price_list = [
-            {"true":5.45, "false":5.95},
-            {"true":6.50, "false":7.15},
-            {"true":7.50, "false":8.25},
-            {"true":10.25, "false":11.30},
-            {"true":30.45, "false":33.50},
-            {"true":37.95, "false":41.70},
-            {"true":56.25, "false":61.90},
-            {"true":75.60, "false":83.20},
-            {"true":99.15, "false":109.05},
-            {"true":115.35, "false":126.90},
-            {"true":153.85, "false":169.35},
-            {"true":5.45, "false":5.95},
+            {"true":5.75, "false":6.30},
+            {"true":6.85, "false":7.55},
+            {"true":7.90, "false":8.70},
+            {"true":10.80, "false":11.85},
+            {"true":32.00, "false":35.20},
+            {"true":39.85, "false":43.85},
+            {"true":59.10, "false":65.00},
+            {"true":79.40, "false":87.35},
+            {"true":104.15, "false":114.55},
+            {"true":121.15, "false":133.25},
+            //{"true":153.85, "false":169.35}, //Can't find this size anymore?
+            {"true":5.75, "false":6.30},
         ];
         //Change #3: Sewer charges
-        var sewer_charge = {"true": 18.15, "false": 19.95};
-        var sewer_volume = {"true": 12.22, "false": 15.89};
+        var sewer_charge = {"true": 19.10, "false": 21.00};
+        var sewer_volume = {"true": 13.35, "false": 17.36};
         //Change #5: Storm Water charges
-        var current_storm_water_base = [//2025 prices
+        var current_storm_water_base = [//2026 prices
+            {'ERU':.60, 'charge':6.43},
+            {'ERU':.80, 'charge':8.57},
+            {'ERU':1, 'charge':10.71},
+            {'ERU':1.25, 'charge':13.39},
+            {'ERU':1.7, 'charge':18.21},
+        ]
+        var last_year_storm_water_base = [//2025 prices
             {'ERU':.37, 'charge':3.16},
             {'ERU':.66, 'charge':5.64},
             {'ERU':.67, 'charge':5.72},
@@ -41,15 +48,6 @@
             {'ERU':1.25, 'charge':10.68},
             {'ERU':1.8, 'charge':15.37},
             {'ERU':2.5, 'charge':21.35},
-        ]
-        var last_year_storm_water_base = [//2024 prices
-            {'ERU':.37, 'charge':2.94},
-            {'ERU':.66, 'charge':5.24},
-            {'ERU':.67, 'charge':5.32},
-            {'ERU':1, 'charge':7.94},
-            {'ERU':1.25, 'charge':9.93},
-            {'ERU':1.8, 'charge':14.29},
-            {'ERU':2.5, 'charge':19.85},
         ]
         var formatDollar = new Intl.NumberFormat('en-US', {
             style: 'currency',
@@ -114,9 +112,9 @@
         //Change #4: Solid Waste charges
 
         var in_city_limits = true;
-        var trash_cart = [20.94, 22.76, 25.17, 7.97]; //respective sizes are 35G, 65G, 95G, low income rate
-        var additional65 = 4.54;
-        var additional95 = 5.75;
+        var trash_cart = [22.09, 24.01, 26.55, 8.40]; //respective sizes are 35G, 65G, 95G, low income rate
+        var additional65 = 4.79;
+        var additional95 = 6.07;
 
         var reveal = function(){
             var inside = document.getElementById('Inside');
